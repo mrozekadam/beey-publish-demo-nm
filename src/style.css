@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+:root {
+  --background: #fff;
+  --foreground: #000;
+}
+
+html {
+  font-size: 15px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  background: linear-gradient(
+    180deg,
+    #fff6e5 2.52%,
+    rgb(243 222 188) 49.66%,
+    #f3ab589e 95.71%
+  );
+  background-attachment: fixed;
+  min-height: 100%;
+  margin: 0;
+  color: var(--foreground);
+}
+
+#publish-container {
+  position: relative;
+  overflow: hidden; 
+  /* Oveflow:hidden used to stop .speakers spans with necessary absolute position from overflowing their parent horizontally while allowing speaker tooltips to overflow the media player vertically.  */
+  margin: 0 auto;
+  max-width: 900px;
+  background-color: white;
+  padding: 0 2rem 2rem;
+  box-shadow: 0 0 6px #aaa;
+}
+
+@media (min-width: 450px) {
+  #publish-container {
+    padding-top: 1rem;
+  }
+}
+@media (min-width: 768px) {
+  #publish-container {
+    margin-top: 2rem;
+    border-radius: 12px;
+  }
+}
+
