@@ -18,6 +18,6 @@
     "webpack-dev-server": "^4.8.1"
   },
   "dependencies": {
-    "beey-publish": "^1.3.0"
+    "beey-publish": "^1.4.0"
   }
 }

@@ -7,7 +7,9 @@ const container = document.querySelector('#publish-container');
 
 const publish = new BeeyPublish(container, {
   mediaSrc: 'http://192.168.101.10:7777/assets/short.mp4',
-  trsxSrc: 'http://192.168.101.10:7777/assets/nm.trsx',
+  trsxSrc: {
+    url:'http://192.168.101.10:7777/assets/nm.trsx'
+  },
   hasVideo: false,
 });
 
