@@ -23,8 +23,7 @@ body {
   color: var(--foreground);
 }
 
-#publish-container {
-  position: relative;
+.container {
   overflow: hidden; 
   /* Oveflow:hidden used to stop .speakers spans with necessary absolute position from overflowing their parent horizontally while allowing speaker tooltips to overflow the media player vertically.  */
   margin: 0 auto;
@@ -35,12 +34,13 @@ body {
 }
 
 @media (min-width: 450px) {
-  #publish-container {
+  .container {
     padding-top: 1rem;
   }
 }
+
 @media (min-width: 768px) {
-  #publish-container {
+  .container {
     margin-top: 2rem;
     border-radius: 12px;
   }

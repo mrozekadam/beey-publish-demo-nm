@@ -2,17 +2,19 @@
 import BeeyPublish from 'beey-publish';
 import 'beey-publish/dist/style.css';
 import './style.css';
+import './keywords.css';
 
 const container = document.querySelector('#publish-container');
 
 const publish = new BeeyPublish(container, {
-  mediaSrc: 'http://192.168.101.10:7777/assets/short.mp4',
-  trsxSrc: {
-    url:'http://192.168.101.10:7777/assets/nm.trsx'
+  media: {
+    url: 'http://192.168.101.10:7777/assets/DT02.mp4',
+    hasVideo: true,
   },
-  hasVideo: false,
 });
 
-fetch('http://192.168.101.10:7777/assets/demoKeywords.json')
+publish.loadTrsx({
+  url: 'http://192.168.101.10:7777/assets/DT02-2000.trsx'
+}).then(() => fetch('http://192.168.101.10:7777/assets/demoKeywords.json'))
   .then((resp) => resp.json())
-  .then((demoKeywords) => publish.setKeywords(demoKeywords));
+  .then((json) => publish.attachKeywords(json));
