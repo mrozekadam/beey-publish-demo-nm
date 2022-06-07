@@ -36,6 +36,7 @@ node_modules/
 
 # Generated output
 dist
+public 
 
 # VS Code settings
 .vscode
