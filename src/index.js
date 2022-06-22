@@ -16,6 +16,6 @@ const publish = new BeeyPublish(container, {
 
 publish.loadTrsx({
   url: 'http://192.168.101.10:7777/assets/DT02.trsx'
-}).then(() => fetch('DT02-keywords.json'))
+}).then(() => fetch('http://192.168.101.10:7777/assets/DT02-keywords.json'))
   .then((resp) => resp.json())
   .then((json) => publish.attachKeywords(json));
