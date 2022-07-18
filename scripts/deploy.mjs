@@ -2,9 +2,10 @@ import { NodeSSH } from 'node-ssh';
 import prompt from 'prompt';
 import config from './deployconfig.js';
 
-const HOST = '192.168.101.10';
-
-console.info(`Deploying to ${HOST} as ${config.username}`);
+const host = '192.168.101.10';
+const username = config.username;
+const remoteDir = '/www/apps-beey-publish';
+console.info(`Deploying to ${host} as ${username}`);
 
 prompt.start();
 const { password } = await prompt.get({
@@ -16,52 +17,49 @@ const { password } = await prompt.get({
 });
 
 const ssh = new NodeSSH();
-await ssh.connect({
-  host: HOST,
-  port: 22,
-  username: config.username,
-  password,
+
+const execSudo = async (command) => {
+  const result = await ssh.execCommand(
+    command, { execOptions: { pty: true }, stdin: `${password}\n` }
+  );
+
+  if(result.code === 0) {
+    return;
+  }
+
+  console.error('error:', result);
+  ssh.dispose();
+  process.exit();
+}
+
+try {
+  await ssh.connect({
+    host,
+    port: 22,
+    username,
+    password,
+  });
+} catch (e) {
+  console.error('error:', e.message);
+  process.exit();
+}
+
+console.info('deploy: stopping server');
+await execSudo('sudo systemctl stop beey-publish.service');
+
+console.info('deploy: copying files:');
+await execSudo(`sudo bash -c 'cd ${remoteDir}/server && rm -rf * && ln -s ../assets assets'`);
+
+await ssh.putDirectory('./dist', `${remoteDir}/server`, {
+  recursive: true,
+  tick: (localFile, remoteFile) => {
+    console.info(`  copy ${localFile} -> ${remoteFile}`);
+  },
 });
 
-const sudoOptions = { execOptions: { pty: true }, stdin: `${password}\n` };
+console.info('deploy: starting server');
+await execSudo('sudo systemctl start beey-publish.service');
 
-console.info(
-  (await ssh.execCommand(
-    'sudo systemctl stop beey-publish.service',
-    sudoOptions,
-  )).stdin,
-);
-
-console.info(
-  (await ssh.execCommand(
-    'cd /www/apps-beey-publish && sudo rm bundle-* index.html',
-    sudoOptions,
-  )).stderr,
-);
-
-console.info(
-  (await ssh.execCommand(
-    'sudo systemctl start beey-publish.service',
-    sudoOptions,
-  )).stderr,
-);
-
-// await ssh.execCommand('rm -rf dist/* node_modules package*', { cwd: remoteDir });
-// await ssh.putDirectory('./dist', `${remoteDir}/dist`, {
-//   recursive: true,
-//   tick: (localFile) => {
-//     console.info(localFile);
-//   },
-// });
-// await ssh.putFile('./package.json', `${remoteDir}/package.json`);
-// console.info('package.json');
-// await ssh.execCommand('cp server-config.json5 dist/', { cwd: remoteDir });
-
-// console.info(
-//   (await ssh.execCommand('npm install --production', { cwd: remoteDir })).stdout,
-// );
-// console.info(
-//   (await ssh.execCommand(`supervisorctl start kodim_${instance}`)).stdout,
-// );
+console.info('deploy: success');
 
 ssh.dispose();

@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && webpack --mode=production",
+    "build": "npm run clean && webpack --mode=production && rimraf dist/public",
     "dev": "webpack serve --open",
-    "deploy": "node scripts/deploy.mjs"
+    "deploy": "npm run build && node scripts/deploy.mjs"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +24,6 @@
     "webpack-dev-server": "^4.8.1"
   },
   "dependencies": {
-    "@beey/publish": "^1.6.2"
+    "@beey/publish": "^1.6.3"
   }
 }
