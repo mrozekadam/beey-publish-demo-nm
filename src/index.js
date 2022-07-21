@@ -1,6 +1,6 @@
 
 import BeeyPublish from '@beey/publish';
-import '@beey/publish/dist/style.css';
+import '@beey/publish/dist/beey-publish.css';
 import './style.css';
 import './keywords.css';
 
