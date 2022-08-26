@@ -1,7 +1,15 @@
-.kw-entity-person {
+.pkw-entity-person {
   background-color: yellow;
 }
 
-.kw-entity-movie {
+.tkw-entity-person {
+  color: yellow;
+}
+
+.pkw-entity-movie {
   background-color: lightblue;
+}
+
+.tkw-entity-movie {
+  color: lightblue;
 }
