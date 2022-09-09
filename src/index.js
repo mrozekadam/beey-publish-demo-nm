@@ -8,14 +8,14 @@ const container = document.querySelector('#publish-container');
 
 const publish = new BeeyPublish(container, {
   media: {
-    url: 'http://192.168.101.10:7777/assets/DT02.mp4',
+    url: '/assets/DT02.mp4',
     hasVideo: true,
   },
-  subtitlesUrl: 'http://192.168.101.10:7777/assets/DT02.vtt',
+  subtitlesUrl: '/assets/DT02.vtt',
 });
 
 publish.loadTrsx({
-  url: 'http://192.168.101.10:7777/assets/DT02.trsx'
-}).then(() => fetch('http://192.168.101.10:7777/assets/DT02-keywords.json'))
+  url: '/assets/DT02.trsx'
+}).then(() => fetch('/assets/DT02-keywords.json'))
   .then((resp) => resp.json())
   .then((json) => publish.attachKeywords(json));
