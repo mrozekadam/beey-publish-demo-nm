@@ -16,6 +16,9 @@ module.exports = {
     devMiddleware: {
       writeToDisk: true, 
     },
+    proxy: {
+      '/assets': 'http://192.168.101.10:7777',
+    },
   },
   module: {
     rules: [
