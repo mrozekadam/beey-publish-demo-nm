@@ -6,6 +6,11 @@
   color: yellow;
 }
 
+.pkw-entity-guest, .skw-entity-guest {
+  background-color: orange;
+  color: white;
+}
+
 .pkw-entity-movie {
   background-color: lightblue;
 }
