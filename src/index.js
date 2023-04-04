@@ -8,13 +8,13 @@ const container = document.querySelector('#publish-container');
 
 const publish = new BeeyPublish(container, {
   media: {
-    url: '/assets/DT02.mp4',
+    url: '/assets/GBNews.mp4',
   },
-  subtitlesUrl: '/assets/DT02.vtt',
+  subtitlesUrl: '/assets/GBNews.vtt',
 });
 
 publish.loadTrsx({
-  url: '/assets/DT02.trsx'
-}).then(() => fetch('/assets/DT02-keywords2.json'))
+  url: '/assets/GBNews2.trsx'
+}).then(() => fetch('/assets/emptyJSON.json'))
   .then((resp) => resp.json())
   .then((json) => publish.attachKeywords(json));
