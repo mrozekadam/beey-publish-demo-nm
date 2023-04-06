@@ -15,6 +15,6 @@ const publish = new BeeyPublish(container, {
 
 publish.loadTrsx({
   url: '/assets/GBNews2.trsx'
-}).then(() => fetch('/assets/emptyJSON.json'))
+}).then(() => fetch('/assets/tesco-lidl3.json'))
   .then((resp) => resp.json())
   .then((json) => publish.attachKeywords(json));
