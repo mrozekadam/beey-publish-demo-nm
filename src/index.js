@@ -11,6 +11,7 @@ const publish = new BeeyPublish(container, {
     url: '/assets/GBNews.mp4',
   },
   subtitlesUrl: '/assets/GBNews.vtt',
+  downloadMedia: false
 });
 
 publish.loadTrsx({
